@@ -17,7 +17,7 @@ bool any_move_remaining(){
 }
 
 
-int function()
+int check_winner()
 {
 	// Checking for Rows for X or O victory.
 	for(int row = 0; row<3; row++)
@@ -85,7 +85,7 @@ void board_print(){
 //Min-Max Algorithm of Game Theory
 int minmax(int depth,bool Is){
 
-	int points=function();
+	int points=check_winner();
 	if(points== +100 || points== -100 )
 		return points;
 	if(any_move_remaining()==false)
@@ -145,7 +145,7 @@ int minmax(int depth,bool Is){
 
 //Checking for the best move of system
 void best_move(){
-	int X=-1,Y=-1,BEST=-1;
+	int X=-1,Y=-1,BEST=-1000;
 
 	for(int i=0;i<3;i++)
 		for(int j=0;j<3;j++)
@@ -188,7 +188,7 @@ int main()
 	cout<<nl;
 	cout<<"FIRST TURN IS YOURS "<<nl;
 		board_print();
-	while(function()==false && any_move_remaining()==true){
+	while(check_winner()==false && any_move_remaining()==true){
 		int x,y;
 
 		// player movers
@@ -206,17 +206,17 @@ int main()
 		else continue;
 
 		}while(correct_input==false);
-		if(function()) break;
+		if(check_winner()) break;
 		else  board_print();
 
 		// bot moves
 		best_move();
-		if(function()) break;
+		if(check_winner()) break;
 		else  board_print();
 
 	}
 
-	if(function()== -100)
+	if(check_winner()== -100)
 	{
 		cout<<nl;
 		cout<<nl;
@@ -225,7 +225,7 @@ int main()
 		cout<<"      G A M E     O V E R    "<<nl;
 
 	}
-	else if(function()== 100)
+	else if(check_winner()== 100)
 	{
 		cout<<nl;
 		cout<<nl;
